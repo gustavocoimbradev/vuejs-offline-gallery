@@ -11,6 +11,10 @@
 
 <body>
     <div id="app">
+        <header class="header">
+            <h1>Offline <span>Gallery</span></h1>
+            <p>Save any image from the internet, instantly and forever. Just paste the link. That’s it.</p>
+        </header>
         <form class="form" @submit.prevent="addPhoto">
             <input type="text" placeholder="Enter image URL" class="form-input" v-model="url">
             <button class="form-button">Add Photo</button>

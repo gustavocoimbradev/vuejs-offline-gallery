@@ -13,6 +13,18 @@
 }
 
 @layer components {
+    .header {
+        @apply mb-10;
+        h1 {
+            @apply text-4xl text-center font-semibold mb-4 text-slate-600;
+            span {
+                @apply text-blue-500;
+            }
+        }
+        p {
+            @apply text-center text-slate-500;
+        }
+    }
     .form {
         @apply p-8 flex items-center gap-2 bg-white rounded-md shadow-lg shadow-slate-200/80;
         .form-input {
@@ -35,7 +47,7 @@
         }
     }
     .no-pictures {
-        @apply text-center mt-6 text-slate-40;
+        @apply text-center mt-6 text-slate-400;
     }
 }
 
