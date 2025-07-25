@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuejs</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <form class="form" @submit.prevent="addPhoto">
+            <input type="text" placeholder="Enter image URL" class="form-input" v-model="url">
+            <button class="form-button">Add Photo</button>
+        </form>
+        <div v-if="photos.length" class="pictures">
+            <figure v-for="photo in photos">
+                <button @click="removePhoto(photo)">X</button>
+                <img :src="photo">
+            </figure>
+        </div>
+        <div v-else class="no-pictures">
+            No pictures added yet
+        </div>
+    </div>
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+
+                let url = ref(``);
+
+                let photos = ref(JSON.parse(localStorage.getItem(`my_photos`)||`[]`));
+
+                const addPhoto = () => {
+                    photos.value.push(url.value);
+                    localStorage.setItem('my_photos', JSON.stringify(photos.value));
+                    url.value = ``;
+                }
+
+                const removePhoto = (photo) => {
+                    photos.value = photos.value.filter(p => p !== photo);
+                    localStorage.setItem(`my_photos`, JSON.stringify(photos.value));
+                }
+
+                return {
+                    addPhoto, photos, url, removePhoto
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
