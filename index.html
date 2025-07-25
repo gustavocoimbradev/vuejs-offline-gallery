@@ -33,10 +33,22 @@
 
                 let url = ref(``);
 
-                let photos = ref(JSON.parse(localStorage.getItem(`my_photos`)||`[]`));
+                let photos = ref(JSON.parse(localStorage.getItem(`my_photos`) || `[]`));
 
-                const addPhoto = () => {
-                    photos.value.push(url.value);
+                const toBase64 = async (url) => {
+                    const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+                    const blob = await response.blob();
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(blob);
+                    });
+                }
+
+                const addPhoto = async () => {
+                    const base64 = await toBase64(url.value);
+                    photos.value.push(base64);
                     localStorage.setItem('my_photos', JSON.stringify(photos.value));
                     url.value = ``;
                 }
