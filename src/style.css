@@ -35,7 +35,7 @@
         }
     }
     .pictures {
-        @apply grid grid-cols-1 xl:grid-cols-3 gap-6 mt-6;
+        @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-6;
         figure {
             @apply h-[300px] bg-white shadow-lg shadow-slate-200/80 rounded-md flex items-center justify-center overflow-hidden relative;
             button {
